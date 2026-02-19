@@ -3,115 +3,573 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>LB Nails & Beauty</title>
-  <meta name="description" content="Nails & beauty services. Book now." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <title>Sam’s Nails</title>
+  <style>
+    :root{
+      --bg: #ffffff;
+      --ink:#141414;
+      --muted:#6b6b6b;
+      --card:#ffffff;
+      --line:#ece8e4;
+      --accent:#b76e79; /* rose-gold-ish */
+      --shadow: 0 10px 30px rgba(0,0,0,.06);
+      --radius: 18px;
+      --max: 1100px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.5;
+    }
+    a{ color:inherit; text-decoration:none; }
+    img{ max-width:100%; display:block; }
+
+    /* ---------- NAV ---------- */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,.78);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .brand{
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .brand span{ color:var(--accent); }
+    .nav-links{
+      display:flex; gap:14px; align-items:center;
+      font-size:14px;
+      color:var(--muted);
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow: 0 6px 18px rgba(0,0,0,.05);
+      font-weight:600;
+      font-size:14px;
+      cursor:pointer;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn.primary{
+      background:var(--ink);
+      color:#fff;
+      border-color:var(--ink);
+    }
+
+    /* ---------- HERO (fixed background) ---------- */
+    .hero{
+      min-height: 86vh;
+      display:grid;
+      align-items:center;
+      position:relative;
+
+      /* IMPORTANT: background stays still */
+      background-image:
+        linear-gradient( rgba(255,255,255,.88), rgba(255,255,255,.88) ),
+        url("https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=2400&q=80");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    /* Soft floral corner overlay (subtle, girly, not loud) */
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background-image: url("https://images.unsplash.com/photo-1526040652367-ac003a0475fe?auto=format&fit=crop&w=1600&q=60");
+      background-size: 620px auto;
+      background-repeat:no-repeat;
+      background-position: right -80px top -60px;
+      opacity:.22;
+      pointer-events:none;
+      mix-blend-mode:multiply;
+    }
+    .hero-inner{
+      position:relative;
+      max-width:var(--max);
+      margin:0 auto;
+      padding: 64px 18px;
+      display:grid;
+      gap:18px;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:13px;
+      color:var(--muted);
+      letter-spacing:.2px;
+    }
+    .dot{
+      width:7px; height:7px; border-radius:50%;
+      background:var(--accent);
+      display:inline-block;
+    }
+    h1{
+      margin:0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-weight:700;
+      letter-spacing:-.4px;
+      font-size: clamp(38px, 5vw, 60px);
+      line-height:1.05;
+      max-width: 18ch;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size: clamp(16px, 2vw, 18px);
+      max-width: 60ch;
+    }
+    .hero-cta{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .hero-stats{
+      margin-top:18px;
+      display:flex; gap:14px; flex-wrap:wrap;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .pill{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.8);
+      border-radius:999px;
+      padding:10px 12px;
+      display:inline-flex; gap:10px; align-items:center;
+    }
+
+    /* ---------- SECTIONS ---------- */
+    section{
+      padding: 70px 18px;
+    }
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+    }
+    .sec-title{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:14px; flex-wrap:wrap;
+      margin-bottom: 22px;
+    }
+    .sec-title h2{
+      margin:0;
+      font-size: 28px;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+    }
+    .sec-title p{
+      margin:0;
+      color:var(--muted);
+      max-width: 60ch;
+    }
+
+    .grid{
+      display:grid;
+      gap:16px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(0,0,0,.05);
+      overflow:hidden;
+    }
+    .card-pad{ padding:18px; }
+
+    /* Featured sets */
+    .feat .card{ grid-column: span 4; }
+    .thumb{
+      height: 210px;
+      background:#f6f3f1;
+      background-size:cover;
+      background-position:center;
+    }
+    .meta{
+      display:flex; justify-content:space-between; gap:12px;
+      color:var(--muted);
+      font-size:14px;
+      margin-top:10px;
+    }
+
+    /* Gallery */
+    .gallery .card{ grid-column: span 3; }
+    .gimg{ height: 180px; background:#f6f3f1; background-size:cover; background-position:center; }
+
+    /* Booking */
+    .booking{
+      background: #fbfaf9;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      position:relative;
+      overflow:hidden;
+    }
+    .booking::before{
+      content:"";
+      position:absolute; inset:-120px -120px auto auto;
+      width:520px; height:520px;
+      background: radial-gradient(circle at center, rgba(183,110,121,.18), transparent 60%);
+      border-radius:50%;
+      pointer-events:none;
+    }
+    form{
+      display:grid;
+      gap:12px;
+    }
+    label{
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:4px;
+      display:block;
+    }
+    input, select, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      outline:none;
+      font: inherit;
+      background:#fff;
+    }
+    textarea{ min-height: 110px; resize: vertical; }
+
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+
+    /* Footer */
+    footer{
+      padding: 34px 18px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .feat .card{ grid-column: span 6; }
+      .gallery .card{ grid-column: span 4; }
+    }
+    @media (max-width: 640px){
+      .nav-links{ display:none; }
+      .feat .card{ grid-column: span 12; }
+      .gallery .card{ grid-column: span 6; }
+      .two{ grid-template-columns: 1fr; }
+      .hero{
+        background-attachment: scroll; /* mobile performance */
+      }
+    }
+  </style>
 </head>
+
 <body>
-
-  <!-- ===== TOP BAR OVER HERO ===== -->
-  <header class="topbar">
-    <a class="brand" href="#">
-      <div class="brandLogo">LB <span>NAILS</span></div>
-      <div class="brandSub">&amp; Beauty</div>
-    </a>
-
-    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="menu" id="menu">
-      <a href="#services">Services</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact</a>
-      <a class="menuCta" href="#contact">Book</a>
-    </nav>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">Sam’s <span>Nails</span></div>
+      <nav class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#book">Book</a>
+        <a href="#shop">Shop</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="btn primary" href="#book">Book now</a>
+    </div>
   </header>
 
-  <!-- ===== HERO SLIDER ===== -->
-  <section class="hero" aria-label="Hero slider">
-    <div class="slides" id="slides">
-      <div class="slide is-active" style="background-image:url('assets/hero-1.jpg')"></div>
-      <div class="slide" style="background-image:url('assets/hero-2.jpg')"></div>
-      <div class="slide" style="background-image:url('assets/hero-3.jpg')"></div>
-      <div class="slide" style="background-image:url('assets/hero-4.jpg')"></div>
-    </div>
-
-    <div class="heroOverlay"></div>
-
-    <div class="heroCenter">
-      <h1>Welcome to LB Nails &amp; Beauty</h1>
-      <p>Luxury nails • Beauty • Clean finishes</p>
-    </div>
-
-    <!-- slider dots (01 02 03 04) -->
-    <div class="heroDots" id="heroDots" aria-label="Slide navigation">
-      <button class="dot is-active" data-i="0">01</button>
-      <button class="dot" data-i="1">02</button>
-      <button class="dot" data-i="2">03</button>
-      <button class="dot" data-i="3">04</button>
-    </div>
-
-    <!-- right social stack -->
-    <aside class="socialStack" aria-label="Social links">
-      <a class="socialBtn" href="#" aria-label="Instagram">IG</a>
-      <a class="socialBtn" href="#" aria-label="Facebook">f</a>
-      <a class="socialBtn" href="#" aria-label="Google">G</a>
-    </aside>
-
-    <!-- floating action buttons -->
-    <aside class="floatBtns" aria-label="Quick actions">
-      <a class="fab" href="#contact" title="Book">📅</a>
-      <a class="fab" href="tel:+447000000000" title="Call">📞</a>
-      <button class="fab" id="toTop" title="Back to top">↑</button>
-    </aside>
-  </section>
-
-  <!-- ===== CONTENT (simple placeholders) ===== -->
   <main>
-    <section id="services" class="section">
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <div class="kicker"><span class="dot"></span> Luxury nails • clean finish • custom art</div>
+        <h1>Beautiful sets that look expensive.</h1>
+        <p class="sub">
+          Sam’s Nails — fresh, feminine, professional. Book an appointment or shop press-on sets.
+        </p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#book">Book appointment</a>
+          <a class="btn" href="#work">View work</a>
+          <a class="btn" href="#shop">Shop press-ons</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="pill">⭐ 5.0 rating <span style="opacity:.6">(placeholder)</span></div>
+          <div class="pill">📍 Your City <span style="opacity:.6">(placeholder)</span></div>
+          <div class="pill">🕒 Mon–Sat <span style="opacity:.6">(placeholder)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feat" id="work">
       <div class="wrap">
-        <h2>Services</h2>
+        <div class="sec-title">
+          <div>
+            <h2>Featured sets</h2>
+            <p>Swap these placeholders with Sam’s real work later — the layout is built to flex.</p>
+          </div>
+          <a class="btn" href="#book">Get this look</a>
+        </div>
+
         <div class="grid">
-          <article class="card"><h3>BIAB / Builder Gel</h3><p>Strong, clean, natural finish.</p></article>
-          <article class="card"><h3>Gel Polish</h3><p>Glossy, crisp prep, long-lasting.</p></article>
-          <article class="card"><h3>Brows &amp; Lashes</h3><p>Defined, flattering, not overdone.</p></article>
+          <article class="card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="card-pad">
+              <strong>Gloss Nude</strong>
+              <div class="meta"><span>Short / Oval</span><span>from £25</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="card-pad">
+              <strong>French Tips</strong>
+              <div class="meta"><span>Medium / Almond</span><span>from £30</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="card-pad">
+              <strong>Detail Art</strong>
+              <div class="meta"><span>Long / Coffin</span><span>from £40</span></div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="gallery" class="section alt">
+    <section id="services">
       <div class="wrap">
-        <h2>Gallery</h2>
-        <div class="gallery">
-          <img src="assets/gallery-1.jpg" alt="Gallery 1" loading="lazy">
-          <img src="assets/gallery-2.jpg" alt="Gallery 2" loading="lazy">
-          <img src="assets/gallery-3.jpg" alt="Gallery 3" loading="lazy">
-          <img src="assets/gallery-4.jpg" alt="Gallery 4" loading="lazy">
+        <div class="sec-title">
+          <div>
+            <h2>Services</h2>
+            <p>Simple pricing now (starting prices). Later we can expand into full menu + add-ons.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card card-pad" style="grid-column: span 6;">
+            <strong>Gel Manicure</strong><div class="meta"><span>45–60 mins</span><span>from £25</span></div>
+          </div>
+          <div class="card card-pad" style="grid-column: span 6;">
+            <strong>Acrylic Full Set</strong><div class="meta"><span>60–90 mins</span><span>from £35</span></div>
+          </div>
+          <div class="card card-pad" style="grid-column: span 6;">
+            <strong>BIAB / Builder Gel</strong><div class="meta"><span>60 mins</span><span>from £30</span></div>
+          </div>
+          <div class="card card-pad" style="grid-column: span 6;">
+            <strong>Nail Art Add-on</strong><div class="meta"><span>10–30 mins</span><span>from £5</span></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="section">
+    <section class="gallery">
       <div class="wrap">
-        <h2>Book / Contact</h2>
-        <p>Replace these with her real links.</p>
-        <div class="contactRow">
-          <a class="cta" href="#">Instagram DM</a>
-          <a class="cta" href="tel:+447000000000">Call</a>
-          <a class="cta" href="mailto:hello@example.com">Email</a>
+        <div class="sec-title">
+          <div>
+            <h2>Gallery</h2>
+            <p>Clean grid = professional. This is where her real work will do the talking.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card"><div class="gimg" style="background-image:url('https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=80');"></div></div>
+          <div class="card"><div class="gimg" style="background-image:url('https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=900&q=80');"></div></div>
+          <div class="card"><div class="gimg" style="background-image:url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=900&q=80');"></div></div>
+          <div class="card"><div class="gimg" style="background-image:url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=900&q=80');"></div></div>
+          <div class="card"><div class="gimg" style="background-image:url('https://images.unsplash.com/photo-1556228578-6f5f4f3f3a59?auto=format&fit=crop&w=900&q=80');"></div></div>
+          <div class="card"><div class="gimg" style="background-image:url('https://images.unsplash.com/photo-1512207846876-bb54ef5051a1?auto=format&fit=crop&w=900&q=80');"></div></div>
+          <div class="card"><div class="gimg" style="background-image:url('https://images.unsplash.com/photo-1526040652367-ac003a0475fe?auto=format&fit=crop&w=900&q=80');"></div></div>
+          <div class="card"><div class="gimg" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80');"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking" id="book">
+      <div class="wrap">
+        <div class="sec-title">
+          <div>
+            <h2>Book an appointment</h2>
+            <p>For now this can email/WhatsApp the request. Later we swap this to Calendly or a real booking system.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card card-pad" style="grid-column: span 7;">
+            <form id="bookingForm">
+              <div class="two">
+                <div>
+                  <label for="name">Name</label>
+                  <input id="name" name="name" placeholder="Your name" required />
+                </div>
+                <div>
+                  <label for="phone">Phone</label>
+                  <input id="phone" name="phone" placeholder="07..." required />
+                </div>
+              </div>
+
+              <div class="two">
+                <div>
+                  <label for="service">Service</label>
+                  <select id="service" name="service" required>
+                    <option value="">Select…</option>
+                    <option>Gel Manicure</option>
+                    <option>BIAB / Builder Gel</option>
+                    <option>Acrylic Full Set</option>
+                    <option>Infills</option>
+                    <option>Custom / Unsure</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="date">Preferred date</label>
+                  <input id="date" name="date" type="date" required />
+                </div>
+              </div>
+
+              <div class="two">
+                <div>
+                  <label for="time">Preferred time</label>
+                  <select id="time" name="time" required>
+                    <option value="">Select…</option>
+                    <option>Morning</option>
+                    <option>Afternoon</option>
+                    <option>Evening</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="length">Nail length</label>
+                  <select id="length" name="length">
+                    <option>Short</option>
+                    <option>Medium</option>
+                    <option>Long</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="notes">Notes (shape / design / inspo)</label>
+                <textarea id="notes" name="notes" placeholder="e.g. almond, nude with gold, french tips…"></textarea>
+              </div>
+
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn primary" type="submit">Send booking request</button>
+                <a class="btn" id="whatsBtn" href="#" target="_blank" rel="noreferrer">Send via WhatsApp</a>
+              </div>
+
+              <p style="margin:10px 0 0; color:var(--muted); font-size:13px;">
+                *Demo mode. When you’re ready, we’ll plug in a real booking system.
+              </p>
+            </form>
+          </div>
+
+          <div class="card card-pad" style="grid-column: span 5;">
+            <strong>How it works</strong>
+            <p style="color:var(--muted); margin-top:10px;">
+              Pick a service and time. Sam confirms availability and replies with the final slot.
+              Want a deposit system? Easy — we can add it with Stripe or Shopify.
+            </p>
+
+            <div style="margin-top:14px; display:grid; gap:10px;">
+              <div class="pill">✅ Clean, premium finish</div>
+              <div class="pill">✅ Custom designs welcome</div>
+              <div class="pill">✅ Press-ons available</div>
+            </div>
+
+            <div id="shop" style="margin-top:18px;">
+              <strong>Shop (coming next)</strong>
+              <p style="color:var(--muted); margin-top:10px;">
+                We’ll add a Shop page with products + checkout (Shopify/Stripe link).
+              </p>
+              <a class="btn" href="#contact">Ask about press-ons</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="sec-title">
+          <div>
+            <h2>Contact</h2>
+            <p>Pop in address + socials later. For now placeholders keep it looking real.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card card-pad" style="grid-column: span 6;">
+            <strong>Location</strong>
+            <p style="color:var(--muted); margin-top:10px;">Your City, UK (placeholder)</p>
+          </div>
+          <div class="card card-pad" style="grid-column: span 6;">
+            <strong>Social</strong>
+            <p style="color:var(--muted); margin-top:10px;">Instagram: @samsnails (placeholder)</p>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="wrap">© <span id="year"></span> LB Nails &amp; Beauty</div>
+  <footer>
+    <div class="wrap">© <span id="yr"></span> Sam’s Nails • Built for a clean, premium look.</div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    document.getElementById("yr").textContent = new Date().getFullYear();
+
+    // Demo booking: builds a WhatsApp message + basic mailto fallback.
+    const form = document.getElementById("bookingForm");
+    const whatsBtn = document.getElementById("whatsBtn");
+
+    function buildMsg(data){
+      return `Booking request for Sam’s Nails%0A
+Name: ${encodeURIComponent(data.get("name"))}%0A
+Phone: ${encodeURIComponent(data.get("phone"))}%0A
+Service: ${encodeURIComponent(data.get("service"))}%0A
+Preferred date: ${encodeURIComponent(data.get("date"))}%0A
+Preferred time: ${encodeURIComponent(data.get("time"))}%0A
+Length: ${encodeURIComponent(data.get("length"))}%0A
+Notes: ${encodeURIComponent(data.get("notes") || "")}`;
+    }
+
+    function updateWhats(){
+      const data = new FormData(form);
+      const msg = buildMsg(data);
+
+      // Replace with Sam’s real WhatsApp number later: e.g. 4479...
+      const whatsappNumber = "447000000000";
+      whatsBtn.href = `https://wa.me/${whatsappNumber}?text=${msg}`;
+    }
+
+    form.addEventListener("input", updateWhats);
+    updateWhats();
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const subject = encodeURIComponent("Booking request - Sam’s Nails");
+      const body = buildMsg(data).replaceAll("%0A", "\n");
+
+      // Replace with Sam's email later
+      const email = "sam@example.com";
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    });
+  </script>
 </body>
 </html>
