@@ -3,300 +3,114 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Velvet Nail & Beauty Studio</title>
-  <meta name="description" content="Luxury nail & beauty treatments. Builder gel, BIAB, gel polish, lashes, brows. Book your appointment today." />
-  <meta name="theme-color" content="#0b0b0f" />
+  <title>LB Nails & Beauty</title>
+  <meta name="description" content="Nails & beauty services. Book now." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <a class="skip" href="#main">Skip to content</a>
 
-  <!-- ===== NAV ===== -->
-  <header class="header">
-    <div class="container nav">
-      <a class="brand" href="#">
-        <span class="brandMark" aria-hidden="true">✦</span>
-        <span class="brandText">
-          <span class="brandName">Velvet</span>
-          <span class="brandSub">Nail & Beauty Studio</span>
-        </span>
-      </a>
+  <!-- ===== TOP BAR OVER HERO ===== -->
+  <header class="topbar">
+    <a class="brand" href="#">
+      <div class="brandLogo">LB <span>NAILS</span></div>
+      <div class="brandSub">&amp; Beauty</div>
+    </a>
 
-      <button class="navBtn" id="navBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
-        <span></span><span></span><span></span>
-      </button>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
 
-      <nav class="navMenu" id="navMenu">
-        <a href="#services">Services</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#contact">Contact</a>
-        <a class="btn btnSmall" href="#contact">Book now</a>
-      </nav>
-    </div>
+    <nav class="menu" id="menu">
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+      <a class="menuCta" href="#contact">Book</a>
+    </nav>
   </header>
 
-  <main id="main">
-    <!-- ===== HERO ===== -->
-    <section class="hero">
-      <div class="container heroGrid">
-        <div class="heroCopy">
-          <p class="pill">Luxury • Clean • Detail obsessed</p>
-          <h1>Premium nails & beauty that look expensive — because they are.</h1>
-          <p class="lead">
-            Builder gel / BIAB, gel polish, nail art, lashes, brows — finished properly, lasting properly.
-            Based in <span class="muted">[Your Town]</span>.
-          </p>
+  <!-- ===== HERO SLIDER ===== -->
+  <section class="hero" aria-label="Hero slider">
+    <div class="slides" id="slides">
+      <div class="slide is-active" style="background-image:url('assets/hero-1.jpg')"></div>
+      <div class="slide" style="background-image:url('assets/hero-2.jpg')"></div>
+      <div class="slide" style="background-image:url('assets/hero-3.jpg')"></div>
+      <div class="slide" style="background-image:url('assets/hero-4.jpg')"></div>
+    </div>
 
-          <div class="ctaRow">
-            <a class="btn" href="#contact">Book appointment</a>
-            <a class="btn btnGhost" href="#gallery">See work</a>
-          </div>
+    <div class="heroOverlay"></div>
 
-          <div class="trustRow">
-            <div class="trustItem">
-              <strong>5★</strong>
-              <span>Client rated</span>
-            </div>
-            <div class="trustItem">
-              <strong>Sanitised</strong>
-              <span>Clean tools, every time</span>
-            </div>
-            <div class="trustItem">
-              <strong>Natural</strong>
-              <span>Healthy nail focus</span>
-            </div>
-          </div>
-        </div>
+    <div class="heroCenter">
+      <h1>Welcome to LB Nails &amp; Beauty</h1>
+      <p>Luxury nails • Beauty • Clean finishes</p>
+    </div>
 
-        <div class="heroCard">
-          <div class="heroImgWrap">
-            <img src="assets/hero.jpg" alt="Nails and beauty studio work preview" loading="eager" />
-          </div>
+    <!-- slider dots (01 02 03 04) -->
+    <div class="heroDots" id="heroDots" aria-label="Slide navigation">
+      <button class="dot is-active" data-i="0">01</button>
+      <button class="dot" data-i="1">02</button>
+      <button class="dot" data-i="2">03</button>
+      <button class="dot" data-i="3">04</button>
+    </div>
 
-          <div class="heroCardBody">
-            <div class="heroMini">
-              <span class="dot"></span>
-              <div>
-                <strong>Next available:</strong>
-                <span class="muted">[Add dates later]</span>
-              </div>
-            </div>
-            <div class="heroMini">
-              <span class="dot dot2"></span>
-              <div>
-                <strong>DM to book:</strong>
-                <span class="muted">@yourinstagram</span>
-              </div>
-            </div>
-            <p class="fine">
-              *Demo site — details will be replaced with your branding, pricing, and photos.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="heroGlow" aria-hidden="true"></div>
-    </section>
+    <!-- right social stack -->
+    <aside class="socialStack" aria-label="Social links">
+      <a class="socialBtn" href="#" aria-label="Instagram">IG</a>
+      <a class="socialBtn" href="#" aria-label="Facebook">f</a>
+      <a class="socialBtn" href="#" aria-label="Google">G</a>
+    </aside>
 
-    <!-- ===== SERVICES ===== -->
-    <section class="section" id="services">
-      <div class="container">
-        <div class="sectionHead">
-          <h2>Services</h2>
-          <p class="muted">A clean menu that looks professional even before final pricing.</p>
-        </div>
+    <!-- floating action buttons -->
+    <aside class="floatBtns" aria-label="Quick actions">
+      <a class="fab" href="#contact" title="Book">📅</a>
+      <a class="fab" href="tel:+447000000000" title="Call">📞</a>
+      <button class="fab" id="toTop" title="Back to top">↑</button>
+    </aside>
+  </section>
 
-        <div class="cards">
-          <article class="card">
-            <h3>Builder Gel / BIAB</h3>
-            <p>Strength + structure with a natural look. Perfect for growth & durability.</p>
-            <ul class="list">
-              <li>Infill / maintenance</li>
-              <li>Short–medium length</li>
-              <li>Natural or colour finish</li>
-            </ul>
-            <div class="priceRow">
-              <span class="price">from £XX</span>
-              <a class="link" href="#contact">Enquire</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>Gel Polish</h3>
-            <p>Glossy, chip-resistant colour with clean prep and a crisp finish.</p>
-            <ul class="list">
-              <li>Hands or feet</li>
-              <li>Prep included</li>
-              <li>Lasts ~2–3 weeks</li>
-            </ul>
-            <div class="priceRow">
-              <span class="price">from £XX</span>
-              <a class="link" href="#contact">Enquire</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>Lashes & Brows</h3>
-            <p>Polished definition that suits your face — not a copy-paste look.</p>
-            <ul class="list">
-              <li>Classic / hybrid / volume</li>
-              <li>Brow tidy + tint</li>
-              <li>Consult first</li>
-            </ul>
-            <div class="priceRow">
-              <span class="price">from £XX</span>
-              <a class="link" href="#contact">Enquire</a>
-            </div>
-          </article>
-        </div>
-
-        <div class="note">
-          <strong>Good to know:</strong> Patch test & aftercare guidance available. Exact list + pricing will be finalised with your details.
+  <!-- ===== CONTENT (simple placeholders) ===== -->
+  <main>
+    <section id="services" class="section">
+      <div class="wrap">
+        <h2>Services</h2>
+        <div class="grid">
+          <article class="card"><h3>BIAB / Builder Gel</h3><p>Strong, clean, natural finish.</p></article>
+          <article class="card"><h3>Gel Polish</h3><p>Glossy, crisp prep, long-lasting.</p></article>
+          <article class="card"><h3>Brows &amp; Lashes</h3><p>Defined, flattering, not overdone.</p></article>
         </div>
       </div>
     </section>
 
-    <!-- ===== GALLERY ===== -->
-    <section class="section alt" id="gallery">
-      <div class="container">
-        <div class="sectionHead">
-          <h2>Gallery</h2>
-          <p class="muted">Swap these placeholders for her real photos later — layout stays premium.</p>
-        </div>
-
+    <section id="gallery" class="section alt">
+      <div class="wrap">
+        <h2>Gallery</h2>
         <div class="gallery">
-          <button class="shot" data-full="assets/gallery-1.jpg" aria-label="Open gallery image 1">
-            <img src="assets/gallery-1.jpg" alt="Nails design example 1" loading="lazy" />
-          </button>
-          <button class="shot" data-full="assets/gallery-2.jpg" aria-label="Open gallery image 2">
-            <img src="assets/gallery-2.jpg" alt="Nails design example 2" loading="lazy" />
-          </button>
-          <button class="shot" data-full="assets/gallery-3.jpg" aria-label="Open gallery image 3">
-            <img src="assets/gallery-3.jpg" alt="Beauty treatment example 3" loading="lazy" />
-          </button>
-          <button class="shot" data-full="assets/gallery-4.jpg" aria-label="Open gallery image 4">
-            <img src="assets/gallery-4.jpg" alt="Beauty treatment example 4" loading="lazy" />
-          </button>
-        </div>
-
-        <div class="ctaBar">
-          <div>
-            <h3>Want this exact look with your brand?</h3>
-            <p class="muted">Send 8–12 photos and your name/logo and it’ll be dialled in fast.</p>
-          </div>
-          <a class="btn" href="#contact">Get in touch</a>
+          <img src="assets/gallery-1.jpg" alt="Gallery 1" loading="lazy">
+          <img src="assets/gallery-2.jpg" alt="Gallery 2" loading="lazy">
+          <img src="assets/gallery-3.jpg" alt="Gallery 3" loading="lazy">
+          <img src="assets/gallery-4.jpg" alt="Gallery 4" loading="lazy">
         </div>
       </div>
     </section>
 
-    <!-- ===== REVIEWS ===== -->
-    <section class="section" id="reviews">
-      <div class="container">
-        <div class="sectionHead">
-          <h2>Client reviews</h2>
-          <p class="muted">Placeholders now — later we’ll paste real feedback.</p>
+    <section id="contact" class="section">
+      <div class="wrap">
+        <h2>Book / Contact</h2>
+        <p>Replace these with her real links.</p>
+        <div class="contactRow">
+          <a class="cta" href="#">Instagram DM</a>
+          <a class="cta" href="tel:+447000000000">Call</a>
+          <a class="cta" href="mailto:hello@example.com">Email</a>
         </div>
-
-        <div class="quotes">
-          <figure class="quote">
-            <blockquote>“Best set I’ve had — lasted weeks and the prep was so clean.”</blockquote>
-            <figcaption>— Client A</figcaption>
-          </figure>
-          <figure class="quote">
-            <blockquote>“Attention to detail is unreal. Proper luxury finish.”</blockquote>
-            <figcaption>— Client B</figcaption>
-          </figure>
-          <figure class="quote">
-            <blockquote>“Super professional, hygienic, and the shape was perfect.”</blockquote>
-            <figcaption>— Client C</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== CONTACT ===== -->
-    <section class="section alt" id="contact">
-      <div class="container contactGrid">
-        <div>
-          <h2>Book & enquiries</h2>
-          <p class="muted">
-            Keep booking simple. For v1, link Instagram DM / WhatsApp.
-            Later you can add a proper booking system.
-          </p>
-
-          <div class="contactCards">
-            <a class="contactCard" href="https://instagram.com/" target="_blank" rel="noreferrer">
-              <strong>Instagram</strong>
-              <span class="muted">@yourinstagram</span>
-              <span class="tag">DM to book</span>
-            </a>
-            <a class="contactCard" href="https://wa.me/447000000000" target="_blank" rel="noreferrer">
-              <strong>WhatsApp</strong>
-              <span class="muted">+44 7XXX XXXXXX</span>
-              <span class="tag">Fast replies</span>
-            </a>
-            <a class="contactCard" href="mailto:hello@example.com">
-              <strong>Email</strong>
-              <span class="muted">hello@example.com</span>
-              <span class="tag">Business</span>
-            </a>
-          </div>
-
-          <p class="fine">
-            Location: <span class="muted">[Town/Area]</span> • Hours: <span class="muted">[Add later]</span>
-          </p>
-        </div>
-
-        <form class="form" onsubmit="return false;">
-          <h3>Quick enquiry</h3>
-          <label>
-            Name
-            <input type="text" placeholder="Your name" />
-          </label>
-          <label>
-            Service
-            <select>
-              <option>Builder Gel / BIAB</option>
-              <option>Gel Polish</option>
-              <option>Lashes</option>
-              <option>Brows</option>
-              <option>Other</option>
-            </select>
-          </label>
-          <label>
-            Message
-            <textarea rows="4" placeholder="Tell us what you want (date, style, length, etc.)"></textarea>
-          </label>
-          <button class="btn" id="fakeSend">Send message</button>
-          <p class="fine muted">
-            Demo form (doesn’t send yet). For v2 we can wire this to email, Formspree, or a booking tool.
-          </p>
-        </form>
       </div>
     </section>
   </main>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <div class="container footerRow">
-      <p>© <span id="year"></span> Velvet Nail & Beauty Studio • All rights reserved</p>
-      <div class="footerLinks">
-        <a href="#services">Services</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
+    <div class="wrap">© <span id="year"></span> LB Nails &amp; Beauty</div>
   </footer>
-
-  <!-- ===== LIGHTBOX ===== -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <button class="lightboxClose" id="lightboxClose" aria-label="Close image">×</button>
-    <img id="lightboxImg" alt="Expanded gallery image" />
-  </div>
 
   <script src="script.js"></script>
 </body>

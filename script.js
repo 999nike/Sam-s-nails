@@ -2,70 +2,55 @@
   const year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
 
-  // Mobile nav
-  const navBtn = document.getElementById("navBtn");
-  const navMenu = document.getElementById("navMenu");
-  if (navBtn && navMenu) {
-    navBtn.addEventListener("click", () => {
-      const open = navMenu.classList.toggle("open");
-      navBtn.setAttribute("aria-expanded", String(open));
+  // menu
+  const burger = document.getElementById("burger");
+  const menu = document.getElementById("menu");
+  if (burger && menu) {
+    burger.addEventListener("click", () => {
+      const open = menu.classList.toggle("open");
+      burger.setAttribute("aria-expanded", String(open));
     });
-
-    navMenu.querySelectorAll("a").forEach(a => {
-      a.addEventListener("click", () => {
-        navMenu.classList.remove("open");
-        navBtn.setAttribute("aria-expanded", "false");
-      });
-    });
+    menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+      menu.classList.remove("open");
+      burger.setAttribute("aria-expanded", "false");
+    }));
   }
 
-  // Lightbox
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightboxImg");
-  const lightboxClose = document.getElementById("lightboxClose");
+  // slider
+  const slides = Array.from(document.querySelectorAll(".slide"));
+  const dots = Array.from(document.querySelectorAll(".dot"));
+  let i = 0;
+  let timer = null;
 
-  const openLightbox = (src) => {
-    if (!lightbox || !lightboxImg) return;
-    lightboxImg.src = src;
-    lightbox.style.display = "grid";
-    lightbox.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-  };
+  function setSlide(n){
+    i = (n + slides.length) % slides.length;
+    slides.forEach((s, idx) => s.classList.toggle("is-active", idx === i));
+    dots.forEach((d, idx) => d.classList.toggle("is-active", idx === i));
+  }
 
-  const closeLightbox = () => {
-    if (!lightbox) return;
-    lightbox.style.display = "none";
-    lightbox.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-  };
+  function start(){
+    stop();
+    timer = setInterval(() => setSlide(i + 1), 4500);
+  }
+  function stop(){
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
 
-  document.querySelectorAll(".shot").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const src = btn.getAttribute("data-full");
-      if (src) openLightbox(src);
+  dots.forEach(d => {
+    d.addEventListener("click", () => {
+      const n = Number(d.dataset.i || 0);
+      setSlide(n);
+      start();
     });
   });
 
-  if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
-  if (lightbox) {
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-  }
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeLightbox();
-  });
+  setSlide(0);
+  start();
 
-  // Demo form button
-  const fakeSend = document.getElementById("fakeSend");
-  if (fakeSend) {
-    fakeSend.addEventListener("click", () => {
-      fakeSend.textContent = "Sent (demo)";
-      fakeSend.disabled = true;
-      setTimeout(() => {
-        fakeSend.textContent = "Send message";
-        fakeSend.disabled = false;
-      }, 1400);
-    });
+  // back to top
+  const toTop = document.getElementById("toTop");
+  if (toTop) {
+    toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   }
 })();
